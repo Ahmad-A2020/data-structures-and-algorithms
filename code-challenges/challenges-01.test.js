@@ -139,8 +139,8 @@ test('It should only add the available items to the list', () => {
 const createList = (availableItems) => {
   let newArray=[];
   availableItems.forEach(item =>{
-    if (item[1]===true){
-      newArray.push(item[0]);
+    if (item.available===true){
+      newArray.push(item.name);
     }    
   })
   return newArray;
@@ -167,12 +167,16 @@ test('It should print out messages or numbers', () => {
 const fizzbuzz = (arr) => {
   let newArray=[];
   arr.forEach(item=>{
-    if (item % 3===0){
-      newArray.push("Fizz");
+    if (item % 3===0 && item % 5===0)
+    {    
+      newArray.push("Fizz Buzz");  
+      
     }else if(item % 5===0){
       newArray.push("Buzz");
-    }else if (item % 3===0 && item % 5===0){
-      newArray.push("Fizz Buzz");
+    }else if (item % 3===0){
+      newArray.push("Fizz");      
+    }else{
+      newArray.push(item);
     }
   })
   return newArray;
