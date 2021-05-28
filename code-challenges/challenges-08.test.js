@@ -8,6 +8,13 @@ Use the characters data below for all of the challenges except challenge 2 and 3
 
 Write a function named sortByChildren that sorts the characters below by the number of children in each house (fewest to most). If a house has the same number of children, sort alphabetically by house name.
 
+describe('Testing challenge 1', () => {
+  test('It should sort the characters by number of children', () => {
+    expect(sortByChildren(characters)[0].name).toStrictEqual('Euron');
+    expect(sortByChildren(characters)[0].children.length).toStrictEqual(0);
+  });
+});
+
 ------------------------------------------------------------------------------------------------ */
 let characters = [
   {
@@ -55,7 +62,19 @@ let characters = [
 ];
 
 const sortByChildren = (charArray) => {
-  // Solution code here...
+  charArray.sort((a,b)=>{
+    if(a.children.length !==b.children.length){
+      return (a.children.length-b.children.length);
+    }else{
+      if(a.house>b.house){
+        return 1
+      }else{
+        return 0
+      }
+    }
+  });
+  return charArray;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -109,22 +128,54 @@ CHALLENGE 5
 Write a function named isCapitalized that takes in a string. This function should use a regular expression pattern to match all words that begin with a capital letter. It should only match words, not punctuation.
 
 Return an array containing all the matches.
+describe('Testing challenge 5', () => {
+  test('It should only return words that begin with a capital letter', () => {
+    const capitalResult = isCapitalized('We only want to Return the Words that begin With a capital Letter');
+
+    expect(capitalResult).toStrictEqual([ 'We', 'Return', 'Words', 'With', 'Letter' ]);
+    expect(capitalResult.length).toStrictEqual(5);
+
+    expect(isCapitalized('Given by our hand in the meadow that is called Runnymede, between Windsor and Staines, on the fifteenth day of June in the seventeenth year of our reign (i.e. 1215: the new regnal year began on 28 May).')).toStrictEqual(['Given', 'Runnymede', 'Windsor', 'Staines', 'June', 'May']);
+
+    expect(isCapitalized('these words are all failures')).toStrictEqual([]);
+  });
+});
+
 ------------------------------------------------------------------------------------------------ */
 
 const isCapitalized = (str) => {
-  let pattern=/\d[A-Z]/g;
-  return(str.match(pattern))
+  let pattern=/\b[A-Z](\w)*/g;
+  let newStr=str.match(pattern)
+  return (newStr)
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
 
 Write a function named citiesAtoJ that takes in an array of city names and uses a regular expression pattern to return a new array containing any cities that begin with the letters A through J, inclusive.
------------------------------------------------------------------------------------------------- */
+describe('Testing challenge 6', () => {
+  let cities = ['Cleveland', 'San Diego', 'Birmingham', 'Seattle', 'Miami', 'New York City', 'Omaha', 'Portland', 'Austin', 'Boston', 'Newport Beach', 'Hoboken'];
 
+  test('It should return the cities whose names begin with the letters A through J', () => {
+    expect(citiesAtoJ(cities)).toContain('Cleveland', 'Birmingham', 'Austin', 'Boston', 'Hoboken');
+    expect(citiesAtoJ(cities).length).toStrictEqual(5);
+
+    expect(citiesAtoJ([])).toStrictEqual([]);
+    expect(citiesAtoJ(['Albuquerque', 'Chicago', 'Philadelphia', 'Newark', 'Sacramento', 'Eugene'])).toEqual(expect.arrayContaining(['Albuquerque', 'Chicago', 'Eugene']));
+  });
+------------------------------------------------------------------------------------------------ */
 const citiesAtoJ = (arr) => {
-  let pattern=/\d[A-J]/g;
-  return(str.match(pattern))
+  let matchCity=[]
+  arr.forEach(element => {
+    
+    let pattern=/^[A-J](\w)*/g;
+    if (pattern.test(element)){
+      matchCity.push(element)
+    }
+  });
+    return matchCity
+    
+
 };
 
 /* ------------------------------------------------------------------------------------------------
