@@ -114,6 +114,18 @@ CHALLENGE 4
 
 Write a function named containsWorld that takes in a string or number of any length. This function should use a regular expression pattern to return true if the input contains the word 'world' all in lower-case letters, and false if the input does not.
 
+describe('Testing challenge 4', () => {
+  test('It should return true if the input contains the word school in lower case', () => {
+    expect(containsWorld('hello world')).toBe(true);
+  });
+  test('It should return false if the input contains the word school with any upper case letters', () => {
+    expect(containsWorld('Hello World')).toBe(false);
+  });
+  test('It should return false if the input does not contain the word school', () => {
+    expect(containsWorld('hello everyone')).toBe(false);
+  });
+})
+
 ------------------------------------------------------------------------------------------------ */
 
 const containsWorld = (input) => {
